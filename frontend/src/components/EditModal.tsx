@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, Pencil, Film, User, Globe } from "lucide-react";
 import type { Character } from "./CharacterList";
+import { API_URL } from "@/lib/getCharacters";
 
 type Props = {
   character: Character;
