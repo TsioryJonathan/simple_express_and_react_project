@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_URL, getCharacters } from "../lib/getCharacters";
-import UserDetail from "./CharacterCard";
+import CharacterCard from "./CharacterCard";
 import CreateCharacterModal from "./CreateCharacterModal";
 
 export type Character = {
@@ -8,7 +8,6 @@ export type Character = {
   name: string;
   realName: string;
   universe: string;
-  handleDelete: (id: number) => void;
 };
 
 export default function CharacterList() {
@@ -61,10 +60,11 @@ export default function CharacterList() {
 
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {charactersList.map((character) => (
-          <UserDetail
+          <CharacterCard
             key={character.id}
-            {...character}
+            character={character}
             handleDelete={handleDelete}
+            setCharactersList={setCharactersList}
           />
         ))}
       </ul>
