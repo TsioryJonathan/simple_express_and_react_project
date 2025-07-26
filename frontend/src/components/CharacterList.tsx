@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCharacters } from "../lib/getCharacters";
+import { API_URL, getCharacters } from "../lib/getCharacters";
 import UserDetail from "./CharacterDetail";
 
 export type Character = {
@@ -13,8 +13,11 @@ export type Character = {
 function CharacterList() {
   const [charactersList, setCharactersList] = useState<Character[]>([]);
 
-  const handleDelete = (id: number) => {
-    const newList = charactersList.filter((user) => user.id !== id);
+  const handleDelete = async (id: number) => {
+    const res = await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+    const newList = await res.json();
     setCharactersList(newList);
   };
 
@@ -36,6 +39,7 @@ function CharacterList() {
             realName={realName}
             universe={universe}
             handleDelete={handleDelete}
+            key={name}
           />
         ))}
       </ul>
