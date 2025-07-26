@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const jsonPath = path.join(__dirname, "../user.json");
+const jsonPath = path.join(__dirname, "../data/user.json");
 const jsonData = await fs.readFile(jsonPath, "utf-8");
 const data = JSON.parse(jsonData);
 
