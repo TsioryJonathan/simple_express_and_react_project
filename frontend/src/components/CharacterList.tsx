@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL, getCharacters } from "../lib/getCharacters";
 import CharacterCard from "./CharacterCard";
 import CreateCharacterModal from "./CreateCharacterModal";
+import SearchBar from "./SearchBar";
 
 export type Character = {
   id: number;
@@ -13,6 +14,7 @@ export type Character = {
 export default function CharacterList() {
   const [charactersList, setCharactersList] = useState<Character[]>([]);
   const [isCreating, setIsCreating] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleDelete = async (id: number) => {
     try {
@@ -49,6 +51,8 @@ export default function CharacterList() {
         >
           + Add Character
         </button>
+
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
 
       {isCreating && (
@@ -59,14 +63,27 @@ export default function CharacterList() {
       )}
 
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {charactersList.map((character) => (
-          <CharacterCard
-            key={character.id}
-            character={character}
-            handleDelete={handleDelete}
-            setCharactersList={setCharactersList}
-          />
-        ))}
+        {searchTerm === "" || !searchTerm
+          ? charactersList.map((character) => (
+              <CharacterCard
+                key={character.id}
+                character={character}
+                handleDelete={handleDelete}
+                setCharactersList={setCharactersList}
+              />
+            ))
+          : charactersList
+              .filter((char) =>
+                char.name.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((character) => (
+                <CharacterCard
+                  key={character.id}
+                  character={character}
+                  handleDelete={handleDelete}
+                  setCharactersList={setCharactersList}
+                />
+              ))}
       </ul>
     </div>
   );
