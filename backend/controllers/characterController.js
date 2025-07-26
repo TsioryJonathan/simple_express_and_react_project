@@ -36,6 +36,14 @@ export const getUserById = async (req, res) => {
 export const createNewCharacter = async (req, res) => {
   try {
     const newCharacter = await req.body;
+    if (
+      !newCharacter.name ||
+      !newCharacter.id ||
+      !newCharacter.realName ||
+      !newCharacter.universe
+    ) {
+      res.status(400).json({ message: "All fields are required" });
+    }
     data.characters.push(newCharacter);
     res.status(201).json(data.characters);
   } catch (e) {
