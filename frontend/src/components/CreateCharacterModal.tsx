@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { API_URL } from "../lib/getCharacters";
 import type { Character } from "./CharacterList";
+import { API_URL } from "@/lib/getCharacters";
 
 type Props = {
   setCharactersList: (newList: Character[]) => void;
@@ -25,7 +25,7 @@ export default function CreateCharacterModal({
     };
 
     try {
-      const res = await fetch(API_URL, {
+      const res = await fetch(`${API_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

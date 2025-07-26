@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { X, Pencil, Film, User, Globe } from "lucide-react";
-import { API_URL } from "../lib/getCharacters";
 import type { Character } from "./CharacterList";
 
 type Props = {
@@ -51,7 +50,6 @@ export default function EditCharacterModal({
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <div className="relative">
             <Film className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 w-5 h-5" />
             <input
