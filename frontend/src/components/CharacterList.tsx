@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { getUsers } from "../lib/getUsers";
-import UserDetail from "./UserDetail";
+import { getCharacters } from "../lib/getCharacters";
+import UserDetail from "./CharacterDetail";
 
-export type User = {
+export type Character = {
   id: number;
   name: string;
   realName: string;
@@ -10,18 +10,18 @@ export type User = {
   handleDelete: (id: number) => void;
 };
 
-function UserList() {
-  const [usersList, setUsersList] = useState<User[]>([]);
+function CharacterList() {
+  const [charactersList, setCharactersList] = useState<Character[]>([]);
 
   const handleDelete = (id: number) => {
-    const newList = usersList.filter((user) => user.id !== id);
-    setUsersList(newList);
+    const newList = charactersList.filter((user) => user.id !== id);
+    setCharactersList(newList);
   };
 
   useEffect(() => {
     const fetch = async () => {
-      const data = await getUsers();
-      setUsersList(data);
+      const data = await getCharacters();
+      setCharactersList(data);
     };
     fetch();
   }, []);
@@ -29,7 +29,7 @@ function UserList() {
   return (
     <div>
       <ul className="grid grid-cols-3 gap-5">
-        {usersList.map(({ id, name, realName, universe }: User) => (
+        {charactersList.map(({ id, name, realName, universe }: Character) => (
           <UserDetail
             id={id}
             name={name}
@@ -43,4 +43,4 @@ function UserList() {
   );
 }
 
-export default UserList;
+export default CharacterList;

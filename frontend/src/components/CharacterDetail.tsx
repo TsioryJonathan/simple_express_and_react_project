@@ -1,6 +1,12 @@
-import type { User } from "./UserList";
+import type { Character } from "./CharacterList";
 
-function UserDetail({ id, name, realName, universe, handleDelete }: User) {
+function CharacterDetails({
+  id,
+  name,
+  realName,
+  universe,
+  handleDelete,
+}: Character) {
   return (
     <div>
       <h3 className="font-bold">
@@ -21,4 +27,4 @@ function UserDetail({ id, name, realName, universe, handleDelete }: User) {
   );
 }
 
-export default UserDetail;
+export default CharacterDetails;
