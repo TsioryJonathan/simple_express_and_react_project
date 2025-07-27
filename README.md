@@ -25,7 +25,9 @@ npm install
 npm run server
 ```
 
-The backend will start on `http://localhost:3000`.
+By default it will run on `http://localhost/3000`
+
+Although, the backend is live now on `marvel-api-xhvk.onrender.com/characters`
 
 ### Frontend
 
