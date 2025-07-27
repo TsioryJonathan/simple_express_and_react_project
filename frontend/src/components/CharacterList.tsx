@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_URL, getCharacters } from "../lib/getCharacters";
+import {  getCharacters } from "../lib/getCharacters";
 import CharacterCard from "./CharacterCard";
 import CreateCharacterModal from "./CreateCharacterModal";
 import SearchBar from "./SearchBar";
@@ -18,21 +18,7 @@ export default function CharacterList() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const handleDelete = async (id: number) => {
-    try {
-      const res = await fetch(`${API_URL}/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) throw new Error("Failed to delete character");
-
-      const updatedList = await res.json();
-      setCharactersList(updatedList);
-    } catch (err) {
-      console.error("Error deleting character:", err);
-    }
-  };
-
+  
   useEffect(() => {
     (async () => {
       try {
@@ -85,7 +71,6 @@ export default function CharacterList() {
                 <CharacterCard
                   key={character.id}
                   character={character}
-                  handleDelete={handleDelete}
                   setCharactersList={setCharactersList}
                 />
               ))
@@ -97,7 +82,6 @@ export default function CharacterList() {
                   <CharacterCard
                     key={character.id}
                     character={character}
-                    handleDelete={handleDelete}
                     setCharactersList={setCharactersList}
                   />
                 ))}

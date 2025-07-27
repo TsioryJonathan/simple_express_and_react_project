@@ -10,19 +10,33 @@ import {
 } from "lucide-react";
 import EditCharacterModal from "./EditModal";
 import { useState, type Dispatch, type SetStateAction } from "react";
+import { API_URL } from "@/lib/getCharacters";
 type Props = {
   character: Character;
-  handleDelete: (id: number) => void;
   setCharactersList: Dispatch<SetStateAction<Character[]>>;
 };
 
-export default function CharacterCard({
-  character,
-  handleDelete,
-  setCharactersList,
-}: Props) {
+export default function CharacterCard({ character, setCharactersList }: Props) {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const handleDelete = async (id: number) => {
+    try {
+      setIsDeleting(true);
+      const res = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Failed to delete character");
+
+      const updatedList = await res.json();
+      setCharactersList(updatedList);
+      setIsDeleting(false);
+    } catch (err) {
+      console.error("Error deleting character:", err);
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <>
       {isEditing && (
@@ -66,7 +80,6 @@ export default function CharacterCard({
         <div className="flex gap-2 w-full">
           <button
             onClick={() => {
-              setIsDeleting(true);
               handleDelete(character.id);
             }}
             className="mt-4 flex items-center justify-center gap-2 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition cursor-pointer flex-1"
