@@ -3,6 +3,7 @@ import { API_URL, getCharacters } from "../lib/getCharacters";
 import CharacterCard from "./CharacterCard";
 import CreateCharacterModal from "./CreateCharacterModal";
 import SearchBar from "./SearchBar";
+import { Loader2 } from "lucide-react";
 
 export type Character = {
   id: number;
@@ -15,7 +16,8 @@ export default function CharacterList() {
   const [charactersList, setCharactersList] = useState<Character[]>([]);
   const [isCreating, setIsCreating] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const handleDelete = async (id: number) => {
     try {
       const res = await fetch(`${API_URL}/${id}`, {
@@ -34,14 +36,24 @@ export default function CharacterList() {
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
         const data = await getCharacters();
         setCharactersList(data);
+        setIsLoading(false);
       } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
         console.error("Error fetching characters:", err);
       }
     })();
   }, []);
 
+  if (error) {
+    return (
+      <div className="w-screen h-fit flex items-center justify-center">
+        <h1>Error: {error}</h1>
+      </div>
+    );
+  }
   return (
     <div className="p-8 relative">
       <div className="flex justify-center mb-8">
@@ -62,29 +74,35 @@ export default function CharacterList() {
         />
       )}
 
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {searchTerm === "" || !searchTerm
-          ? charactersList.map((character) => (
-              <CharacterCard
-                key={character.id}
-                character={character}
-                handleDelete={handleDelete}
-                setCharactersList={setCharactersList}
-              />
-            ))
-          : charactersList
-              .filter((char) =>
-                char.name.toLowerCase().includes(searchTerm.toLowerCase())
-              )
-              .map((character) => (
+      {isLoading ? (
+        <div className="w-screen h-[20vh] flex items-center justify-center">
+          <Loader2 className="animate-spin h-10 w-10 text-blue-600" />
+        </div>
+      ) : (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {searchTerm === "" || !searchTerm
+            ? charactersList.map((character) => (
                 <CharacterCard
                   key={character.id}
                   character={character}
                   handleDelete={handleDelete}
                   setCharactersList={setCharactersList}
                 />
-              ))}
-      </ul>
+              ))
+            : charactersList
+                .filter((char) =>
+                  char.name.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+                .map((character) => (
+                  <CharacterCard
+                    key={character.id}
+                    character={character}
+                    handleDelete={handleDelete}
+                    setCharactersList={setCharactersList}
+                  />
+                ))}
+        </ul>
+      )}
     </div>
   );
 }

@@ -1,5 +1,13 @@
 import type { Character } from "./CharacterList";
-import { Trash2, User, IdCard, Film, Globe, Pencil } from "lucide-react";
+import {
+  Trash2,
+  User,
+  IdCard,
+  Film,
+  Globe,
+  Pencil,
+  Loader2,
+} from "lucide-react";
 import EditCharacterModal from "./EditModal";
 import { useState, type Dispatch, type SetStateAction } from "react";
 type Props = {
@@ -13,6 +21,7 @@ export default function CharacterCard({
   handleDelete,
   setCharactersList,
 }: Props) {
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   return (
     <>
@@ -56,10 +65,17 @@ export default function CharacterCard({
 
         <div className="flex gap-2 w-full">
           <button
-            onClick={() => handleDelete(character.id)}
+            onClick={() => {
+              setIsDeleting(true);
+              handleDelete(character.id);
+            }}
             className="mt-4 flex items-center justify-center gap-2 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition cursor-pointer flex-1"
           >
-            <Trash2 className="w-5 h-5" />
+            {isDeleting ? (
+              <Loader2 className="w-5 h-5 animate-spin" />
+            ) : (
+              <Trash2 className="w-5 h-5" />
+            )}
             Delete
           </button>
           <button
