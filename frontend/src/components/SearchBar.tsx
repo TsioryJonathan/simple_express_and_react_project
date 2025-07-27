@@ -17,7 +17,7 @@ function SearchBar({
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Rechercher un personnage…"
+          placeholder="Search for a superhero…"
           className="w-md pl-10 pr-10 py-2 border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
 
