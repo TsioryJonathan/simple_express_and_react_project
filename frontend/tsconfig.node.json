@@ -12,6 +12,8 @@
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
+    "jsx": "react-jsx", // pour React 17+ / Vite / Next. Pour React <17, mets "react"
+    "esModuleInterop": true,
     
 
     /* Linting */
