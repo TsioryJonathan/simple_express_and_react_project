@@ -4,7 +4,6 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import { assets } from "@/assets/assets";
 
-// Images locales uploadées
 const marvelSlides = [
   { title: "BLACK PANTHER", img: assets.blackpanther },
   { title: "CAPTAIN MARVEL", img: assets.captainmarvel },

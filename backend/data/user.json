@@ -4,49 +4,57 @@
       "id": 1,
       "name": "Spider-Man",
       "realName": "Peter Parker",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/133.jpg"
     },
     {
       "id": 2,
       "name": "Iron Man",
       "realName": "Tony Stark",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/85.jpg"
     },
     {
       "id": 3,
       "name": "Captain America",
       "realName": "Steve Rogers",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/274.jpg"
     },
     {
       "id": 4,
       "name": "Black Widow",
       "realName": "Natasha Romanoff",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/248.jpg"
     },
     {
       "id": 5,
       "name": "Black Panther",
       "realName": "T'Challa",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/247.jpg"
     },
     {
       "id": 6,
       "name": "Doctor Strange",
       "realName": "Stephen Strange",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/55.jpg"
     },
     {
       "id": 7,
       "name": "Scarlet Witch",
       "realName": "Wanda Maximoff",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/444.jpg"
     },
     {
       "id": 8,
       "name": "Hulk",
       "realName": "Bruce Banner",
-      "universe": "Earth-616"
+      "universe": "Earth-616",
+      "image": "https://www.superherodb.com/pictures2/portraits/10/100/83.jpg"
     }
   ]
 }
